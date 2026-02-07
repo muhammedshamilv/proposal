@@ -91,6 +91,10 @@
             display: none;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
         }
 
         .celebration h2 {
@@ -114,6 +118,17 @@
         @keyframes fall {
             to {
                 transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* Mobile fixes */
+        @media (hover: none) and (pointer: coarse) {
+            .btn-no {
+                -webkit-tap-highlight-color: transparent;
+            }
+            .btn-no:hover {
+                transform: none;
+                box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
             }
         }
     </style>
