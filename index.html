@@ -142,16 +142,23 @@
         const question = document.getElementById('question');
         const celebration = document.getElementById('celebration');
 
-        // Load config from URL parameters
+        // Load config from URL parameters (base64 encoded)
         const urlParams = new URLSearchParams(window.location.search);
-        const proposalMessage = urlParams.get('message');
-        const celebrationMessage = urlParams.get('celebration');
+        const encodedData = urlParams.get('d');
 
-        if (proposalMessage) {
-            document.getElementById('proposalText').textContent = proposalMessage;
-        }
-        if (celebrationMessage) {
-            document.getElementById('celebrationText').textContent = celebrationMessage;
+        if (encodedData) {
+            try {
+                const decoded = decodeURIComponent(escape(atob(encodedData)));
+                const data = JSON.parse(decoded);
+                if (data.m) {
+                    document.getElementById('proposalText').textContent = data.m;
+                }
+                if (data.c) {
+                    document.getElementById('celebrationText').textContent = data.c;
+                }
+            } catch (e) {
+                // Invalid data, use defaults
+            }
         }
 
         let currentX, currentY;
