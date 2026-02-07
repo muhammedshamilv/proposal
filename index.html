@@ -157,13 +157,16 @@
         const question = document.getElementById('question');
         const celebration = document.getElementById('celebration');
 
-        // Load config from localStorage
-        const config = JSON.parse(localStorage.getItem('proposalConfig') || '{}');
-        if (config.proposalMessage) {
-            document.getElementById('proposalText').textContent = config.proposalMessage;
+        // Load config from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const proposalMessage = urlParams.get('message');
+        const celebrationMessage = urlParams.get('celebration');
+
+        if (proposalMessage) {
+            document.getElementById('proposalText').textContent = proposalMessage;
         }
-        if (config.celebrationMessage) {
-            document.getElementById('celebrationText').textContent = config.celebrationMessage;
+        if (celebrationMessage) {
+            document.getElementById('celebrationText').textContent = celebrationMessage;
         }
 
         let currentX, currentY;
