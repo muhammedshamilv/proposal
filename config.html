@@ -152,6 +152,19 @@
             transform: scale(1.02);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
         }
+
+        .btn-shorten {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 10px 25px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+        }
+
+        .btn-shorten:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(155, 89, 182, 0.6);
+        }
     </style>
 </head>
 <body>
@@ -175,6 +188,7 @@
             <label>Your shareable link:</label>
             <input type="text" id="shareableUrl" readonly onclick="this.select()">
             <button class="btn btn-copy" onclick="copyLink()">Copy Link</button>
+            <button class="btn btn-shorten" onclick="shortenLink()">Shorten Link</button>
         </div>
 
         <div class="saved-message" id="savedMessage">Link copied!</div>
@@ -214,6 +228,13 @@
 
             const encoded = encodeData(proposalMessage, celebrationMessage);
             window.location.href = 'index.html?d=' + encodeURIComponent(encoded);
+        }
+
+        function shortenLink() {
+            const url = document.getElementById('shareableUrl').value;
+            if (url) {
+                window.open('https://tinyurl.com/create.php?url=' + encodeURIComponent(url), '_blank');
+            }
         }
     </script>
 </body>
