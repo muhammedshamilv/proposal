@@ -116,12 +116,26 @@
                 transform: translateY(100vh) rotate(720deg);
             }
         }
+
+        .config-link {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .config-link:hover {
+            color: rgba(255,255,255,0.7);
+        }
     </style>
 </head>
 <body>
     <div class="container" id="question">
         <div class="heart">💕</div>
-        <h1>Will You Marry Me?</h1>
+        <h1 id="proposalText">Will You Marry Me?</h1>
         <div class="buttons">
             <button class="btn btn-yes" onclick="sayYes()">Yes!</button>
             <div class="btn-no-placeholder" id="placeholder"></div>
@@ -131,15 +145,26 @@
 
     <div class="celebration" id="celebration">
         <div class="hearts">💕💍💕</div>
-        <h2>Yay! I Love You!</h2>
+        <h2 id="celebrationText">Yay! I Love You!</h2>
         <div class="hearts">🎉💖🎉</div>
     </div>
+
+    <a href="config.html" class="config-link">Configure</a>
 
     <script>
         const noBtn = document.getElementById('noBtn');
         const placeholder = document.getElementById('placeholder');
         const question = document.getElementById('question');
         const celebration = document.getElementById('celebration');
+
+        // Load config from localStorage
+        const config = JSON.parse(localStorage.getItem('proposalConfig') || '{}');
+        if (config.proposalMessage) {
+            document.getElementById('proposalText').textContent = config.proposalMessage;
+        }
+        if (config.celebrationMessage) {
+            document.getElementById('celebrationText').textContent = config.celebrationMessage;
+        }
 
         let currentX, currentY;
 
